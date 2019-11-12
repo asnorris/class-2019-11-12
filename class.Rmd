@@ -1,0 +1,29 @@
+---
+title: "class"
+author: "Alexandra Norris"
+date: "11/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(googlesheets4)
+library(ggplot2)
+
+```
+
+```{r}
+
+sheets_deauth()
+x <- read_sheet("13NhlT-Oik5P4NOKRWwrJ7xZQlddFNk81HHEw9wkWglM")
+
+x %>%
+  lm(formula = dvote ~ partisanship)
+
+x %>%
+  ggplot(aes(x = partisanship, y = dvote)) + geom_jitter(width = 0.2) + geom_smooth(method = lm, se = FALSE)
+
+```
+
